@@ -1,0 +1,90 @@
+<div class="container mt-5">
+  <div class="card text-center">
+    <div class="row">
+      <div class="col-6">
+        <form #tourDetails="ngForm" (ngSubmit)="addTour(tourDetails)">
+
+
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Tour Name</mat-label>
+            <input matInput placeholder="Tour Name"
+                   [(ngModel)]="tour.tour_Name"
+                   name="tour_Name">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Total No. of Days</mat-label>
+            <input matInput placeholder="Total No. of Days"
+                   [(ngModel)]="tour.tour_No_Of_Days"
+                   name="tour_No_Of_Days">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Price of the tour</mat-label>
+            <input matInput placeholder="Price of the tour"
+                   [(ngModel)]="tour.tour_Price"
+                   name="tour_Price">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Overview</mat-label>
+            <input matInput placeholder="Overview"
+                   [(ngModel)]="tour.tour_Overview"
+                   name="tour_Overview">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Highlights</mat-label>
+            <input matInput placeholder="Highlights"
+                   [(ngModel)]="tour.tour_Highlights"
+                   name="tour_Highlights">
+          </mat-form-field>
+
+          <div align="end">
+            <button mat-stroked-button color="primary" style="margin-right: 3px;">Clear</button>
+            <button type="submit" *ngIf="isNewTour"
+                    mat-stroked-button color="primary">Add Tour
+            </button>
+            <button type="submit" *ngIf="!isNewTour"
+                    mat-stroked-button color="primary">Update Tour Details
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="col-6">
+        <div class="dropzone"
+             appDrag
+             (files)="fileDropped($event)"
+        >
+          <div class="centered">
+            <div class="text-wrapper">
+              Drag and Drop your file or
+              <a (click)="selectFile.click()" class="browse-btn">
+                Browse
+              </a>
+              File
+            </div>
+          </div>
+        </div>
+
+        <input type="file" style="display: none;" multiple value="select" #selectFile
+               (change)="onFileSelected({event : $event})">
+
+        <div class="mt-5">
+          <div class="row">
+            <mat-grid-list cols="4" rowHeight="1:1">
+              <mat-grid-tile *ngFor="let file of tour.tour_Images; let i = index;">
+                <div style="Position :relative">
+                  <span class="btn-remove-image" (click)="removeImages(i)">x</span>
+                  <img [src]="file.url" alt="No preview Available" width="100px" height="100px">
+                </div>
+              </mat-grid-tile>
+            </mat-grid-list>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
